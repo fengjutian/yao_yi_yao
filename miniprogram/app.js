@@ -16,12 +16,10 @@ App({
         traceUser: true,
       });
 
-       wx.cloud.callFunction({ name: 'login' })
-      .then(res => {
-        wx.setStorageSync('openid', res.result.openid)
-      })
-
-
+      wx.cloud.callFunction({ name: 'login' })
+        .then(res => {
+          wx.setStorageSync('openid', res.result.openid)
+        });
     }
   },
 });
