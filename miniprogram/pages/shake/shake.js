@@ -1,5 +1,5 @@
-import { pickRestaurant } from '../../utils/shakeAlgorithm'
-import { getHistory, pushHistory } from '../../utils/storage'
+import { pickRestaurant } from '../../utils/shakeAlgorithm.js'
+import { getHistory, pushHistory } from '../../utils/storage.js'
 
 const db = wx.cloud.database()
 

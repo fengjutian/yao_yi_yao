@@ -2,7 +2,7 @@
  * 不重复 + 权重随机算法
  */
 
-export function pickRestaurant(list, history, limit = 3) {
+function pickRestaurant(list, history, limit = 3) {
   if (!list.length) return null
 
   const recent = history.slice(-limit)
@@ -43,4 +43,8 @@ function calcWeight(item) {
   }
 
   return Math.max(0.1, w)
+}
+
+module.exports = {
+  pickRestaurant
 }
