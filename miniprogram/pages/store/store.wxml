@@ -1,0 +1,21 @@
+<view class="container">
+  <input
+    placeholder="店铺名称"
+    value="{{name}}"
+    bindinput="onNameInput"
+  />
+
+  <picker range="{{categories}}" bindchange="onCategoryChange">
+    <view class="picker">
+      {{category || '选择分类'}}
+    </view>
+  </picker>
+
+  <button bindtap="addStore">添加店铺</button>
+
+  <view class="list">
+    <view wx:for="{{list}}" wx:key="_id" class="item">
+      {{item.name}}（{{item.category}}）
+    </view>
+  </view>
+</view>

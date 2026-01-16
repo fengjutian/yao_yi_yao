@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/shake/shake",
+    "pages/store/store",
     "pages/index/index",
     "pages/example/index"
   ],
@@ -7,10 +9,22 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "吃什么",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+    "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/shake/shake",
+        "text": "摇一摇"
+      },
+      {
+        "pagePath": "pages/store/store",
+        "text": "添加店铺"
+      }
+    ]
+  }
 }

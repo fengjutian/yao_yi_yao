@@ -15,6 +15,13 @@ App({
         env: this.globalData.env,
         traceUser: true,
       });
+
+       wx.cloud.callFunction({ name: 'login' })
+      .then(res => {
+        wx.setStorageSync('openid', res.result.openid)
+      })
+
+
     }
   },
 });

@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="tip">摇一摇手机</view>
+
+  <view class="result" wx:if="{{result}}">
+    <text class="name">{{result.name}}</text>
+    <text class="category">{{result.category}}</text>
+
+    <view class="actions">
+      <button size="mini" bindtap="feedbackAccept">就它了</button>
+      <button size="mini" bindtap="feedbackReject">换一个</button>
+    </view>
+  </view>
+
+  <view wx:else class="empty">
+    还没有结果
+  </view>
+</view>

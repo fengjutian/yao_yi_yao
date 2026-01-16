@@ -1,0 +1,26 @@
+.container {
+  padding: 40rpx;
+  text-align: center;
+}
+
+.tip {
+  color: #888;
+  margin-bottom: 60rpx;
+}
+
+.result .name {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.category {
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.actions {
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+}
