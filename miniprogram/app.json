@@ -15,7 +15,7 @@
   "sitemapLocation": "sitemap.json",
   "style": "v2",
   "lazyCodeLoading": "requiredComponents",
-    "tabBar": {
+  "tabBar": {
     "list": [
       {
         "pagePath": "pages/shake/shake",
