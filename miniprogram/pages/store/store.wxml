@@ -1,21 +1,95 @@
 <view class="container">
-  <input
-    placeholder="店铺名称"
-    value="{{name}}"
-    bindinput="onNameInput"
-  />
-
-  <picker range="{{categories}}" bindchange="onCategoryChange">
-    <view class="picker">
-      {{category || '选择分类'}}
+  <!-- 表单区域 -->
+  <view class="form-card">
+    <view class="form-item">
+      <text class="label">店铺名称 *</text>
+      <input
+        class="input"
+        placeholder="请输入店铺名称"
+        value="{{name}}"
+        bindinput="onNameInput"
+      />
     </view>
-  </picker>
 
-  <button bindtap="addStore">添加店铺</button>
+    <view class="form-item">
+      <text class="label">店铺地址</text>
+      <input
+        class="input"
+        placeholder="请输入店铺地址"
+        value="{{address}}"
+        bindinput="onAddressInput"
+      />
+    </view>
 
-  <view class="list">
-    <view wx:for="{{list}}" wx:key="_id" class="item">
-      {{item.name}}（{{item.category}}）
+    <view class="form-item">
+      <text class="label">分类 *</text>
+      <picker range="{{categories}}" bindchange="onCategoryChange">
+        <view class="picker">
+          {{category || '请选择分类'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">店铺照片</text>
+      <view class="photo-area">
+        <image
+          wx:if="{{photoUrl}}"
+          class="photo"
+          src="{{photoUrl}}"
+          mode="aspectFill"
+          bindtap="previewPhoto"
+          data-url="{{photoUrl}}"
+        />
+        <view wx:else class="photo-placeholder" bindtap="choosePhoto">
+          <text class="plus">+</text>
+          <text class="text">点击上传</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-actions">
+      <button class="btn-primary" bindtap="saveStore">
+        {{editingId ? '更新店铺' : '添加店铺'}}
+      </button>
+      <button wx:if="{{editingId}}" class="btn-secondary" bindtap="resetForm">
+        取消编辑
+      </button>
+    </view>
+  </view>
+
+  <!-- 列表区域 -->
+  <view class="list-section">
+    <text class="section-title">我的店铺</text>
+
+    <view wx:if="{{list.length === 0}}" class="empty">
+      <text class="empty-text">暂无店铺，快来添加吧~</text>
+    </view>
+
+    <view wx:else class="list">
+      <view wx:for="{{list}}" wx:key="_id" class="item">
+        <image
+          wx:if="{{item.photoUrl}}"
+          class="item-photo"
+          src="{{item.photoUrl}}"
+          mode="aspectFill"
+          bindtap="previewPhoto"
+          data-url="{{item.photoUrl}}"
+        />
+        <view class="item-info">
+          <text class="item-name">{{item.name}}</text>
+          <text class="item-category">{{item.category}}</text>
+          <text wx:if="{{item.address}}" class="item-address">{{item.address}}</text>
+        </view>
+        <view class="item-actions">
+          <button class="btn-edit" size="mini" bindtap="editStore" data-item="{{item}}">
+            编辑
+          </button>
+          <button class="btn-delete" size="mini" bindtap="deleteStore" data-item="{{item}}">
+            删除
+          </button>
+        </view>
+      </view>
     </view>
   </view>
 </view>

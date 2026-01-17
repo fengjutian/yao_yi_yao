@@ -39,7 +39,6 @@
         "miniprogramNpmDistDir": "./miniprogram/"
       }
     ],
-    "packNpmRelationList": [],
     "minifyWXSS": true,
     "compileWorklet": false,
     "minifyWXML": true,
