@@ -2,6 +2,7 @@ const db = wx.cloud.database()
 
 Page({
   data: {
+    showModal: false, // 控制模态框显示
     name: '',
     address: '',
     category: '',
@@ -13,6 +14,17 @@ Page({
 
   onShow() {
     this.loadList()
+  },
+
+  // 打开添加模态框
+  openAddModal() {
+    this.resetForm()
+    this.setData({ showModal: true })
+  },
+
+  // 关闭模态框
+  closeModal() {
+    this.setData({ showModal: false })
   },
 
   onNameInput(e) {
@@ -103,6 +115,7 @@ Page({
         wx.showToast({ title: '添加成功', icon: 'success' })
       }
 
+      this.setData({ showModal: false })
       this.resetForm()
       this.loadList()
     } catch (err) {
@@ -115,6 +128,7 @@ Page({
   editStore(e) {
     const item = e.currentTarget.dataset.item
     this.setData({
+      showModal: true,
       editingId: item._id,
       name: item.name,
       address: item.address || '',
@@ -130,6 +144,8 @@ Page({
     wx.showModal({
       title: '确认删除',
       content: `确定要删除"${item.name}"吗？`,
+      confirmText: '删除',
+      confirmColor: '#0052D9',
       success: async (res) => {
         if (res.confirm) {
           wx.showLoading({ title: '删除中...' })
@@ -139,8 +155,9 @@ Page({
             wx.showToast({ title: '删除成功', icon: 'success' })
             this.loadList()
 
-            // 如果正在编辑的是被删除的店铺，清空表单
+            // 如果正在编辑的是被删除的店铺，关闭模态框并清空表单
             if (this.data.editingId === item._id) {
+              this.setData({ showModal: false })
               this.resetForm()
             }
           } catch (err) {

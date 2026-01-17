@@ -1,17 +1,49 @@
 <view class="container">
-  <view class="tip">摇一摇手机</view>
+  <!-- 摇动结果 -->
+  <view wx:if="{{result}}" class="result-section">
+    <view class="result-card">
+      <view class="result-icon">
+        <t-icon name="shop" size="120rpx" color="#0052D9" />
+      </view>
+      <text class="result-name">{{result.name}}</text>
+      <view class="result-tags">
+        <t-tag size="large" variant="light" theme="primary">
+          {{result.category}}
+        </t-tag>
+        <t-tag wx:if="{{result.address}}" size="large" variant="light" theme="success">
+          {{result.address}}
+        </t-tag>
+      </view>
+    </view>
 
-  <view class="result" wx:if="{{result}}">
-    <text class="name">{{result.name}}</text>
-    <text class="category">{{result.category}}</text>
-
-    <view class="actions">
-      <button size="mini" bindtap="feedbackAccept">就它了</button>
-      <button size="mini" bindtap="feedbackReject">换一个</button>
+    <view class="feedback-actions">
+      <t-button
+        theme="light"
+        size="large"
+        block
+        bind:tap="feedbackReject"
+      >
+        <t-icon name="close" size="20rpx" />
+        <text>不满意</text>
+      </t-button>
+      <t-button
+        theme="primary"
+        size="large"
+        block
+        bind:tap="feedbackAccept"
+      >
+        <t-icon name="check" size="20rpx" />
+        <text>满意</text>
+      </t-button>
     </view>
   </view>
 
-  <view wx:else class="empty">
-    还没有结果
+  <!-- 摇动提示 -->
+  <view wx:else class="shake-hint">
+    <view class="hint-icon">
+      <t-icon name="loading" size="120rpx" color="#0052D9" />
+    </view>
+    <text class="hint-text">摇一摇选餐厅</text>
+    <text class="hint-sub">摇晃手机选择今天吃什么</text>
   </view>
 </view>

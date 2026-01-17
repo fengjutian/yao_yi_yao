@@ -1,95 +1,133 @@
 <view class="container">
-  <!-- 表单区域 -->
-  <view class="form-card">
-    <view class="form-item">
-      <text class="label">店铺名称 *</text>
-      <input
-        class="input"
-        placeholder="请输入店铺名称"
-        value="{{name}}"
-        bindinput="onNameInput"
-      />
-    </view>
-
-    <view class="form-item">
-      <text class="label">店铺地址</text>
-      <input
-        class="input"
-        placeholder="请输入店铺地址"
-        value="{{address}}"
-        bindinput="onAddressInput"
-      />
-    </view>
-
-    <view class="form-item">
-      <text class="label">分类 *</text>
-      <picker range="{{categories}}" bindchange="onCategoryChange">
-        <view class="picker">
-          {{category || '请选择分类'}}
-        </view>
-      </picker>
-    </view>
-
-    <view class="form-item">
-      <text class="label">店铺照片</text>
-      <view class="photo-area">
-        <image
-          wx:if="{{photoUrl}}"
-          class="photo"
-          src="{{photoUrl}}"
-          mode="aspectFill"
-          bindtap="previewPhoto"
-          data-url="{{photoUrl}}"
-        />
-        <view wx:else class="photo-placeholder" bindtap="choosePhoto">
-          <text class="plus">+</text>
-          <text class="text">点击上传</text>
-        </view>
-      </view>
-    </view>
-
-    <view class="form-actions">
-      <button class="btn-primary" bindtap="saveStore">
-        {{editingId ? '更新店铺' : '添加店铺'}}
-      </button>
-      <button wx:if="{{editingId}}" class="btn-secondary" bindtap="resetForm">
-        取消编辑
-      </button>
-    </view>
+  <!-- 顶部添加按钮 -->
+  <view class="header-actions">
+    <t-button
+      theme="primary"
+      size="large"
+      variant="outline"
+      bind:tap="openAddModal"
+    >
+      <t-icon name="add" size="20rpx" />
+      添加店铺
+    </t-button>
   </view>
 
-  <!-- 列表区域 -->
-  <view class="list-section">
-    <text class="section-title">我的店铺</text>
-
-    <view wx:if="{{list.length === 0}}" class="empty">
-      <text class="empty-text">暂无店铺，快来添加吧~</text>
-    </view>
-
-    <view wx:else class="list">
-      <view wx:for="{{list}}" wx:key="_id" class="item">
+  <!-- 店铺列表 -->
+  <t-cell-group wx:if="{{list.length > 0}}" title="我的店铺">
+    <t-cell
+      wx:for="{{list}}"
+      wx:key="_id"
+      title="{{item.name}}"
+      arrow="{{false}}"
+    >
+      <!-- 左侧照片 -->
+      <view slot="left-icon" wx:if="{{item.photoUrl}}" class="cell-photo">
         <image
-          wx:if="{{item.photoUrl}}"
           class="item-photo"
           src="{{item.photoUrl}}"
           mode="aspectFill"
           bindtap="previewPhoto"
           data-url="{{item.photoUrl}}"
         />
-        <view class="item-info">
-          <text class="item-name">{{item.name}}</text>
-          <text class="item-category">{{item.category}}</text>
-          <text wx:if="{{item.address}}" class="item-address">{{item.address}}</text>
+      </view>
+
+      <!-- 中间信息 -->
+      <view slot="note" class="cell-note">
+        <view class="info-row">
+          <t-icon name="shop" size="32rpx" color="#999" />
+          <text class="info-category">{{item.category}}</text>
         </view>
-        <view class="item-actions">
-          <button class="btn-edit" size="mini" bindtap="editStore" data-item="{{item}}">
-            编辑
-          </button>
-          <button class="btn-delete" size="mini" bindtap="deleteStore" data-item="{{item}}">
-            删除
-          </button>
+        <view wx:if="{{item.address}}" class="info-row">
+          <t-icon name="location" size="32rpx" color="#999" />
+          <text class="info-address">{{item.address}}</text>
+        </view>
+      </view>
+
+      <!-- 右侧操作 -->
+      <view slot="right-icon" class="cell-actions">
+        <t-icon
+          name="edit"
+          size="40rpx"
+          color="#0052D9"
+          class="action-icon"
+          bind:tap="editStore"
+          data-item="{{item}}"
+        />
+        <t-icon
+          name="delete"
+          size="40rpx"
+          color="#ff4d4f"
+          class="action-icon"
+          bind:tap="deleteStore"
+          data-item="{{item}}"
+        />
+      </view>
+    </t-cell>
+  </t-cell-group>
+
+  <!-- 空状态 -->
+  <view wx:if="{{list.length === 0}}" class="empty-state">
+    <t-icon name="shop" size="120rpx" color="#ddd" />
+    <text class="empty-text">暂无店铺</text>
+    <text class="empty-hint">点击"添加店铺"按钮添加第一家店铺吧</text>
+  </view>
+
+  <!-- 模态框 -->
+  <t-dialog
+    visible="{{showModal}}"
+    title="{{editingId ? '编辑店铺' : '添加店铺'}}"
+    confirmBtn="{{editingId ? '更新' : '添加'}}"
+    bind:confirm="saveStore"
+    bind:cancel="closeModal"
+  >
+    <view slot="content" class="modal-content">
+      <!-- 店铺名称 -->
+      <t-input
+        label="店铺名称 *"
+        placeholder="请输入店铺名称"
+        value="{{name}}"
+        bind:change="onNameInput"
+        clearable
+      />
+
+      <!-- 店铺地址 -->
+      <t-input
+        label="店铺地址"
+        placeholder="请输入店铺地址"
+        value="{{address}}"
+        bind:change="onAddressInput"
+        clearable
+      />
+
+      <!-- 分类选择 -->
+      <view class="form-group">
+        <text class="label">分类 *</text>
+        <t-picker
+          value="{{category}}"
+          range="{{categories}}"
+          bind:change="onCategoryChange"
+          placeholder="请选择分类"
+        />
+      </view>
+
+      <!-- 照片上传 -->
+      <view class="form-group">
+        <text class="label">店铺照片</text>
+        <view class="photo-upload">
+          <image
+            wx:if="{{photoUrl}}"
+            class="photo"
+            src="{{photoUrl}}"
+            mode="aspectFill"
+            bindtap="previewPhoto"
+            data-url="{{photoUrl}}"
+          />
+          <view wx:else class="photo-placeholder" bindtap="choosePhoto">
+            <t-icon name="add" size="48rpx" color="#999" />
+            <text class="upload-text">点击上传照片</text>
+          </view>
         </view>
       </view>
     </view>
-  </view>
+  </t-dialog>
 </view>

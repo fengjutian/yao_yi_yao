@@ -14,7 +14,7 @@
 ## 🎨 将要使用的 TDesign 组件
 
 ### 页面组件
-- `t-modal` - 弹出式添加店铺模态框
+- `t-dialog` - 弹出式添加店铺对话框
 - `t-button` - 添加、编辑、删除按钮
 - `t-input` - 店铺名称、地址输入
 - `t-cell-group` / `t-cell` - 店铺列表卡片
@@ -46,10 +46,10 @@
 
 ---
 
-## 🔒 模态框内容
+## 🔒 对话框内容
 
 ```html
-<t-modal
+<t-dialog
   visible="{{showModal}}"
   title="{{editingId ? '编辑店铺' : '添加店铺'}}"
   bind:confirm="saveStore"
@@ -88,7 +88,7 @@
     />
     <t-icon wx:else name="add" bind:tap="choosePhoto" />
   </view>
-</t-modal>
+</t-dialog>
 ```
 
 ---
@@ -145,7 +145,7 @@
 
 ## 💡 TDesign 组件特点
 
-### t-modal（模态框）
+### t-dialog（对话框）
 - 支持确定/取消按钮
 - 可自定义内容区域
 - 遮罩层背景

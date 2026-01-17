@@ -1,40 +1,110 @@
 .container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 40rpx;
+}
+
+/* 结果区域 */
+.result-section {
+  width: 100%;
+  max-width: 600rpx;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-card {
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 60rpx 40rpx;
   text-align: center;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.15);
 }
 
-.tip {
-  font-size: 32rpx;
-  color: #666;
-  margin: 100rpx 0;
+.result-icon {
+  margin-bottom: 30rpx;
+  animation: rotate 0.6s ease-in-out;
 }
 
-.result {
-  margin: 80rpx 0;
+@keyframes rotate {
+  from {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  to {
+    transform: rotate(-15deg);
+  }
 }
 
-.name {
+.result-name {
   display: block;
   font-size: 48rpx;
   font-weight: bold;
+  color: #333;
   margin-bottom: 20rpx;
+  line-height: 1.4;
 }
 
-.category {
-  display: block;
-  font-size: 28rpx;
-  color: #999;
+.result-tags {
+  display: flex;
+  justify-content: center;
+  gap: 16rpx;
   margin-bottom: 40rpx;
 }
 
-.actions {
+.feedback-actions {
   display: flex;
+  gap: 24rpx;
   justify-content: center;
-  gap: 20rpx;
 }
 
-.empty {
+.feedback-actions text {
+  margin-left: 8rpx;
+}
+
+/* 提示区域 */
+.shake-hint {
+  text-align: center;
+  padding: 80rpx 40rpx;
+}
+
+.hint-icon {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20rpx);
+  }
+}
+
+.hint-text {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 16rpx;
+}
+
+.hint-sub {
+  display: block;
   font-size: 28rpx;
-  color: #999;
-  margin: 80rpx 0;
+  color: rgba(255, 255, 255, 0.8);
 }
