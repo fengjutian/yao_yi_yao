@@ -95,12 +95,14 @@ Page({
     const powerList = this.data.powerList;
     const selectedItem = powerList[index];
     if (selectedItem.link) {
-      wx.navigateTo({
-        url: `../web/index?url=${selectedItem.link}&title=${selectedItem.title}`,
+      wx.showModal({
+        title: "功能暂不可用",
+        content: "该功能页面已被删除",
       });
     } else if (selectedItem.type) {
-      wx.navigateTo({
-        url: `/pages/example/index?envId=${this.data.selectedEnv?.envId}&type=${selectedItem.type}`,
+      wx.showModal({
+        title: "功能暂不可用",
+        content: "该功能页面已被删除",
       });
     } else if (selectedItem.page) {
       wx.navigateTo({
@@ -122,15 +124,10 @@ Page({
   jumpPage(e) {
     const { type, page } = e.currentTarget.dataset;
     console.log("jump page", type, page);
-    if (type) {
-      wx.navigateTo({
-        url: `/pages/example/index?envId=${this.data.selectedEnv?.envId}&type=${type}`,
-      });
-    } else {
-      wx.navigateTo({
-        url: `/pages/${page}/index?envId=${this.data.selectedEnv?.envId}`,
-      });
-    }
+    wx.showModal({
+      title: "功能暂不可用",
+      content: "该功能页面已被删除",
+    });
   },
 
   onClickDatabase(powerList, selectedItem) {
@@ -139,7 +136,7 @@ Page({
     });
     wx.cloud
       .callFunction({
-        name: "quickstartFunctions",
+        name: "login",
         data: {
           type: "createCollection",
         },
@@ -173,7 +170,7 @@ Page({
             showTip: true,
             title: "请上传云函数",
             content:
-              "在'cloudfunctions/quickstartFunctions'目录右键，选择【上传并部署-云端安装依赖】，等待云函数上传完成后重试。",
+              "在'cloudfunctions/login'目录右键，选择【上传并部署-云端安装依赖】，等待云函数上传完成后重试。",
           });
           return;
         }
