@@ -166,7 +166,7 @@ Page({
     });
     wx.cloud
       .callFunction({
-        name: "quickstartFunctions",
+        name: "login",
         data: {
           type: "deleteRecord",
           data: {
@@ -215,7 +215,7 @@ Page({
     wx.showLoading({ title: "插入中..." });
     try {
       await wx.cloud.callFunction({
-        name: "quickstartFunctions",
+        name: "login",
         data: {
           type: "insertRecord",
           data: {
@@ -242,7 +242,7 @@ Page({
     });
     wx.cloud
       .callFunction({
-        name: "quickstartFunctions",
+        name: "login",
         data: {
           type: "getOpenId",
         },
@@ -271,7 +271,7 @@ Page({
             showTip: true,
             title: "请上传云函数",
             content:
-              "在'cloudfunctions/quickstartFunctions'目录右键，选择【上传并部署-云端安装依赖】，等待云函数上传完成后重试。",
+              "在'cloudfunctions/login'目录右键，选择【上传并部署-云端安装依赖】，等待云函数上传完成后重试。",
           });
           return;
         }
@@ -298,7 +298,7 @@ Page({
     });
     wx.cloud
       .callFunction({
-        name: "quickstartFunctions",
+        name: "login",
         data: {
           type: "getMiniProgramCode",
         },
@@ -328,7 +328,7 @@ Page({
             showTip: true,
             title: "请上传云函数",
             content:
-              "在'cloudfunctions/quickstartFunctions'目录右键，选择【上传并部署-云端安装依赖】，等待云函数上传完成后重试。",
+              "在'cloudfunctions/login'目录右键，选择【上传并部署-云端安装依赖】，等待云函数上传完成后重试。",
           });
           return;
         }
@@ -357,7 +357,7 @@ Page({
     });
     wx.cloud
       .callFunction({
-        name: "quickstartFunctions",
+        name: "login",
         data: {
           type: "selectRecord",
         },
@@ -390,7 +390,7 @@ Page({
     });
     wx.cloud
       .callFunction({
-        name: "quickstartFunctions",
+        name: "login",
         data: {
           type: "updateRecord",
           data: this.data.record,
@@ -544,7 +544,7 @@ exports.main = async (event, context) => {
   };
 };`,
       callFunctionCode: `wx.cloud.callFunction({
-  name: 'quickstartFunctions',
+  name: 'login',
   data: {
     type: 'getOpenId'
   }
@@ -573,7 +573,7 @@ exports.main = async (event, context) => {
 };
 `,
       callFunctionCode: `wx.cloud.callFunction({
-  name: 'quickstartFunctions',
+  name: 'login',
   data: {
     type: 'getMiniProgramCode'
   }
