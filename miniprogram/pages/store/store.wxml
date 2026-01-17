@@ -13,57 +13,56 @@
   </view>
 
   <!-- 店铺列表 -->
-  <t-cell-group wx:if="{{list.length > 0}}" title="我的店铺">
-    <t-cell
+  <view wx:if="{{list.length > 0}}" class="store-list">
+    <view class="list-title">我的店铺</view>
+    <view
+      class="store-card"
       wx:for="{{list}}"
       wx:key="_id"
-      title="{{item.name}}"
-      arrow="{{false}}"
     >
       <!-- 左侧照片 -->
-      <view slot="left-icon" wx:if="{{item.photoUrl}}" class="cell-photo">
+      <view class="card-photo" bindtap="previewPhoto" data-url="{{item.photoUrl}}">
         <image
-          class="item-photo"
+          wx:if="{{item.photoUrl}}"
+          class="store-photo"
           src="{{item.photoUrl}}"
           mode="aspectFill"
-          bindtap="previewPhoto"
-          data-url="{{item.photoUrl}}"
         />
+        <view wx:else class="no-photo">
+          <t-icon name="shop" size="48rpx" color="#ddd" />
+        </view>
       </view>
 
       <!-- 中间信息 -->
-      <view slot="note" class="cell-note">
-        <view class="info-row">
-          <t-icon name="shop" size="32rpx" color="#999" />
-          <text class="info-category">{{item.category}}</text>
-        </view>
-        <view wx:if="{{item.address}}" class="info-row">
-          <t-icon name="location" size="32rpx" color="#999" />
-          <text class="info-address">{{item.address}}</text>
+      <view class="card-content">
+        <view class="store-name">{{item.name}}</view>
+        <view class="store-info">
+          <t-tag size="small" variant="light" theme="primary">{{item.category}}</t-tag>
+          <text wx:if="{{item.address}}" class="store-address">{{item.address}}</text>
         </view>
       </view>
 
       <!-- 右侧操作 -->
-      <view slot="right-icon" class="cell-actions">
+      <view class="card-actions">
         <t-icon
           name="edit"
-          size="40rpx"
+          size="48rpx"
           color="#0052D9"
-          class="action-icon"
+          class="action-btn"
           bind:tap="editStore"
           data-item="{{item}}"
         />
         <t-icon
           name="delete"
-          size="40rpx"
+          size="48rpx"
           color="#ff4d4f"
-          class="action-icon"
+          class="action-btn"
           bind:tap="deleteStore"
           data-item="{{item}}"
         />
       </view>
-    </t-cell>
-  </t-cell-group>
+    </view>
+  </view>
 
   <!-- 空状态 -->
   <view wx:if="{{list.length === 0}}" class="empty-state">

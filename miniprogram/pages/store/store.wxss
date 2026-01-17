@@ -10,6 +10,7 @@
   background: #fff;
   border-radius: 16rpx;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 20rpx;
 }
 
 /* 空状态 */
@@ -22,6 +23,7 @@
   background: #fff;
   border-radius: 16rpx;
   text-align: center;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
 }
 
 .empty-text {
@@ -37,60 +39,126 @@
   color: #999;
 }
 
-/* 单元格样式 */
-.cell-photo {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 12rpx;
+/* 店铺列表 */
+.store-list {
+  margin-top: 20rpx;
+}
+
+.list-title {
+  font-size: 28rpx;
+  color: #999;
+  padding: 0 10rpx 16rpx;
+  font-weight: 500;
+}
+
+/* 店铺卡片 */
+.store-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
   overflow: hidden;
 }
 
-.item-photo {
+.store-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.store-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6rpx;
+  background: linear-gradient(180deg, #0052D9 0%, #0072FF 100%);
+  border-radius: 16rpx 0 0 16rpx;
+}
+
+/* 卡片照片 */
+.card-photo {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.store-photo {
   width: 100%;
   height: 100%;
-  border-radius: 12rpx;
 }
 
-.cell-note {
-  display: flex;
-  flex-direction: column;
-  gap: 12rpx;
-  padding-left: 20rpx;
-}
-
-.info-row {
+.no-photo {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
   display: flex;
   align-items: center;
-  gap: 8rpx;
+  justify-content: center;
 }
 
-.info-category {
-  font-size: 28rpx;
-  color: #0052D9;
-  background: rgba(0, 82, 217, 0.1);
-  padding: 4rpx 12rpx;
-  border-radius: 8rpx;
+/* 卡片内容 */
+.card-content {
+  flex: 1;
+  min-width: 0;
+  padding-right: 20rpx;
 }
 
-.info-address {
+.store-name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.store-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.store-address {
   font-size: 24rpx;
   color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.cell-actions {
+/* 卡片操作 */
+.card-actions {
   display: flex;
-  gap: 16rpx;
+  gap: 12rpx;
+  flex-shrink: 0;
 }
 
-.action-icon {
-  padding: 8rpx;
-  border-radius: 8rpx;
-  transition: all 0.2s;
+.action-btn {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  transition: all 0.2s ease;
 }
 
-.action-icon:active {
-  opacity: 0.6;
-  transform: scale(0.95);
+.action-btn:active {
+  transform: scale(0.9);
+  opacity: 0.7;
 }
 
 /* 模态框内容 */
