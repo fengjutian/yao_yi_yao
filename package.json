@@ -1,0 +1,11 @@
+{
+  "name": "yao-yi-yao",
+  "version": "1.0.0",
+  "description": "吃什么小程序项目",
+  "scripts": {
+    "install:miniprogram": "cd miniprogram && npm install"
+  },
+  "dependencies": {
+    "tdesign-miniprogram": "^1.12.1"
+  }
+}

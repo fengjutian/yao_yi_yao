@@ -1,0 +1,19 @@
+{
+  "name": "yao-yi-yao-miniprogram",
+  "version": "1.0.0",
+  "description": "吃什么小程序 - 使用 TDesign UI",
+  "main": "app.js",
+  "scripts": {
+    "dev": "echo '开发中...'"
+  },
+  "keywords": [
+    "wechat",
+    "miniprogram",
+    "tdesign"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tdesign-miniprogram": "^1.6.2"
+  }
+}

@@ -1,17 +1,11 @@
 .container {
-  padding: 40rpx;
-}
-
-input {
-  border: 1px solid #ddd;
   padding: 20rpx;
-  margin-bottom: 20rpx;
 }
 
 .picker {
   padding: 20rpx;
+  margin: 20rpx 0;
   background: #f5f5f5;
-  margin-bottom: 20rpx;
 }
 
 .list {
@@ -19,6 +13,7 @@ input {
 }
 
 .item {
-  padding: 10rpx 0;
-  color: #555;
+  padding: 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
 }

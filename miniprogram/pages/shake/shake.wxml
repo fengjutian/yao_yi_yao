@@ -1,17 +1,25 @@
+<!--pages/shake/shake.wxml-->
 <view class="container">
-  <view class="tip">摇一摇手机</view>
+  <view class="result-card" wx:if="{{result}}">
+    <t-icon name="food-1" size="80rpx" color="#0052D9" />
+    <text class="result-name">{{result.name}}</text>
+    <text class="result-category">{{result.category}}</text>
 
-  <view class="result" wx:if="{{result}}">
-    <text class="name">{{result.name}}</text>
-    <text class="category">{{result.category}}</text>
-
-    <view class="actions">
-      <button size="mini" bindtap="feedbackAccept">就它了</button>
-      <button size="mini" bindtap="feedbackReject">换一个</button>
+    <view class="feedback-buttons">
+      <t-button theme="light" size="large" bind:tap="feedbackReject">
+        <t-icon name="close-circle" size="20" />
+        <text>不满意</text>
+      </t-button>
+      <t-button theme="success" size="large" bind:tap="feedbackAccept">
+        <t-icon name="check-circle" size="20" />
+        <text>满意</text>
+      </t-button>
     </view>
   </view>
 
-  <view wx:else class="empty">
-    还没有结果
+  <view class="shake-hint" wx:else>
+    <t-icon name="shake-phone" size="120rpx" color="#0052D9" />
+    <text class="hint-text">摇一摇选餐厅</text>
+    <t-loading theme="circular" size="60rpx" />
   </view>
 </view>
