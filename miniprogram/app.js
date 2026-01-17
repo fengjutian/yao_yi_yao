@@ -16,9 +16,19 @@ App({
         traceUser: true,
       });
 
-      wx.cloud.callFunction({ name: 'login' })
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {
+          type: 'getOpenId'
+        }
+      })
         .then(res => {
-          wx.setStorageSync('openid', res.result.openid)
+          if (res.result && res.result.openid) {
+            wx.setStorageSync('openid', res.result.openid)
+          }
+        })
+        .catch(err => {
+          console.error('获取openid失败:', err)
         });
     }
   },
