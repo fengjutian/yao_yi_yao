@@ -124,6 +124,35 @@ Page({
   jumpPage(e) {
     const { type, page } = e.currentTarget.dataset;
     console.log("jump page", type, page);
+    
+    // 创建集合 - 直接调用云函数
+    if (type === 'createCollection') {
+      wx.showLoading({ title: '创建中...' });
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {
+          type: 'createCollection'
+        }
+      }).then(res => {
+        wx.hideLoading();
+        if (res.result && res.result.success) {
+          wx.showToast({
+            title: '集合创建成功',
+            icon: 'success'
+          });
+          this.setData({ haveCreateCollection: true });
+        }
+      }).catch(err => {
+        wx.hideLoading();
+        console.error('创建失败:', err);
+        wx.showToast({
+          title: '创建失败',
+          icon: 'none'
+        });
+      });
+      return;
+    }
+    
     wx.showModal({
       title: "功能暂不可用",
       content: "该功能页面已被删除",

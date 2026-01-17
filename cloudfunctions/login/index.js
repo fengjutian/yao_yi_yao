@@ -1,6 +1,6 @@
 const cloud = require("wx-server-sdk");
 cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV,
+  env: "fjtcloud-1g428940c7b95d7c",
 });
 
 const db = cloud.database();
@@ -75,6 +75,21 @@ const createCollection = async () => {
     return {
       success: true,
       data: "create collection success",
+    };
+  }
+};
+
+// 创建餐厅集合
+const createRestaurantsCollection = async () => {
+  try {
+    await db.createCollection("restaurants");
+    return {
+      success: true,
+    };
+  } catch (e) {
+    return {
+      success: true,
+      data: "restaurants collection already exists or created successfully",
     };
   }
 };
@@ -173,6 +188,8 @@ exports.main = async (event, context) => {
       return await getMiniProgramCode();
     case "createCollection":
       return await createCollection();
+    case "createRestaurantsCollection":
+      return await createRestaurantsCollection();
     case "selectRecord":
       return await selectRecord();
     case "updateRecord":
