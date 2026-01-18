@@ -1,18 +1,67 @@
 <view class="container">
+  <!-- 礼花效果 -->
+  <view class="confetti-container">
+    <view
+      class="confetti"
+      wx:for="{{confetti}}"
+      wx:key="id"
+      style="left: {{item.x}}%; animation-delay: {{item.delay}}s; animation-duration: {{item.duration}}s;"
+    >
+      <text style="color: {{item.color}}; font-size: {{item.size}}rpx;">{{item.emoji}}</text>
+    </view>
+  </view>
+
+  <!-- 摇动提示 -->
+  <view wx:if="{{!result}}" class="shake-hint">
+    <view class="phone-mockup">
+      <view class="phone-screen">
+        <view class="shake-icon-wrapper" bind:tap="manualShake">
+          <view class="shake-pulse"></view>
+          <t-icon name="mobile" size="180rpx" color="#fff" />
+        </view>
+      </view>
+    </view>
+    <text class="hint-text">摇一摇选餐厅</text>
+    <text class="hint-sub">摇晃手机或点击屏幕选择今天吃什么</text>
+    <view class="stats">
+      <view class="stat-item">
+        <text class="stat-value">{{totalShakes}}</text>
+        <text class="stat-label">摇动次数</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{totalStores}}</text>
+        <text class="stat-label">店铺数量</text>
+      </view>
+    </view>
+  </view>
+
   <!-- 摇动结果 -->
   <view wx:if="{{result}}" class="result-section">
     <view class="result-card">
-      <view class="result-icon">
-        <t-icon name="shop" size="120rpx" color="#0052D9" />
+      <!-- 店铺照片 -->
+      <view class="result-photo" wx:if="{{result.photoUrl}}">
+        <image class="store-image" src="{{result.photoUrl}}" mode="aspectFill" />
       </view>
-      <text class="result-name">{{result.name}}</text>
-      <view class="result-tags">
-        <t-tag size="large" variant="light" theme="primary">
-          {{result.category}}
-        </t-tag>
-        <t-tag wx:if="{{result.address}}" size="large" variant="light" theme="success">
-          {{result.address}}
-        </t-tag>
+      <view class="result-photo" wx:else>
+        <view class="photo-placeholder">
+          <t-icon name="shop" size="160rpx" color="#0052D9" />
+        </view>
+      </view>
+
+      <!-- 店铺信息 -->
+      <view class="result-info">
+        <text class="result-name">{{result.name}}</text>
+        <view class="result-tags">
+          <t-tag size="large" variant="light" theme="primary">
+            <t-icon name="category" size="28rpx" />
+            {{result.category}}
+          </t-tag>
+          <t-tag wx:if="{{result.address}}" size="large" variant="light" theme="success">
+            <t-icon name="location" size="28rpx" />
+            {{result.address}}
+          </t-tag>
+        </view>
       </view>
     </view>
 
@@ -21,29 +70,20 @@
         theme="light"
         size="large"
         block
+        icon="close-circle"
         bind:tap="feedbackReject"
       >
-        <t-icon name="close" size="20rpx" />
-        <text>不满意</text>
+        不满意，重新摇
       </t-button>
       <t-button
         theme="primary"
         size="large"
         block
+        icon="check-circle"
         bind:tap="feedbackAccept"
       >
-        <t-icon name="check" size="20rpx" />
-        <text>满意</text>
+        满意，就这家
       </t-button>
     </view>
-  </view>
-
-  <!-- 摇动提示 -->
-  <view wx:else class="shake-hint">
-    <view class="hint-icon">
-      <t-icon name="loading" size="120rpx" color="#0052D9" />
-    </view>
-    <text class="hint-text">摇一摇选餐厅</text>
-    <text class="hint-sub">摇晃手机选择今天吃什么</text>
   </view>
 </view>
