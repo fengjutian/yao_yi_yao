@@ -1,16 +1,5 @@
 <view class="container">
-  <!-- 顶部添加按钮 -->
-  <view class="header-actions">
-    <t-button
-      theme="primary"
-      size="large"
-      variant="outline"
-      icon="add"
-      bind:tap="openAddModal"
-    >
-      添加店铺
-    </t-button>
-  </view>
+
 
   <!-- 店铺列表 -->
   <view wx:if="{{list.length > 0}}" class="store-list">
@@ -62,6 +51,18 @@
         />
       </view>
     </view>
+  </view>
+
+  <view class="header-actions">
+    <t-button
+      theme="primary"
+      size="large"
+      variant="outline"
+      icon="add"
+      bind:tap="openAddModal"
+    >
+      添加店铺
+    </t-button>
   </view>
 
   <!-- 空状态 -->
