@@ -161,6 +161,11 @@ Page({
       icon: 'success',
       duration: 1500
     })
+
+    // 延迟后关闭结果卡片，返回摇动提示界面
+    setTimeout(() => {
+      this.setData({ result: null })
+    }, 1500)
   },
 
   feedbackReject() {
